@@ -4,43 +4,47 @@ import altair as alt
 import yfinance as yf
 import urllib
 
+st.title("FANG Stock Price")
+st.write("""
+### Stock prices for Various FANG companies over the last **20 days** 
+""")
+
 @st.cache
-def get_UN_data(tickers):
+def get_data(tickers):
     data = []
-    # data = [['tom', 10, 9, 12, 14, 42, 98], ['nick', 15, 89, 9, 21, 2, 4], ['juli', 14, 20, 12, 44, 22, 90]] 
     for company in tickers.keys():
         tkr = yf.Ticker(tickers[company])
-        hist = tkr.history(period="7d")
+        hist = tkr.history(period="20d")
         stock_data = hist['Close'].tolist()
+        stock_data = [round(x, 2) for x in stock_data]
         stock_data.insert(0, company)
         data.append(stock_data)
-
-    # Create the pandas DataFrame 
-    df = pd.DataFrame(data, columns = ['Name', '2018-10-01', '2018-11-01', '2018-12-01', '2018-13-01', '2018-14-01', '2018-15-01', '2018-16-01']) 
+    c = [x for x in range(1,21)]
+    c.insert(0, 'Name')
+    df = pd.DataFrame(data, columns = c) 
     return df.set_index('Name')
 
 try:
-    tickers = {'apple':'AAPL','facebook':'FB'}
-    df = get_UN_data(tickers)
-    countries = st.multiselect(
-        "Choose countries", list(df.index), ["apple", "facebook"]
+    tickers = {'apple':'AAPL', 'facebook':'FB', 'google': 'GOOGL', 'microsoft': 'MSFT', 'netflix': 'NFLX', 'amazon':'AMZN'}
+    df = get_data(tickers)
+    companies = st.multiselect(
+        "Choose companies", list(df.index), ["google", "amazon", "facebook"]
     )
-    if not countries:
+    if not companies:
         st.error("Please select at least one country.")
     else:
-        data = df.loc[countries]
-        st.write("### Stock Prices", data)
-
+        data = df.loc[companies]
+        st.write("### Stock Prices (USD)", data.sort_index())
         data = data.T.reset_index()
         data = pd.melt(data, id_vars=["index"]).rename(
-            columns={"index": "day", "value": "Stock Prices"}
+            columns={"index": "days", "value": "Stock Prices (USD)"}
         )
         chart = (
             alt.Chart(data)
             .mark_area(opacity=0.3)
             .encode(
-                x="day:T",
-                y=alt.Y("Stock Price:Q", stack=None),
+                x="days:O",
+                y=alt.Y("Stock Prices (USD):Q", stack=None),
                 color="Name:N",
             )
         )
