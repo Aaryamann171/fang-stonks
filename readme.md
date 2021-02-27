@@ -3,7 +3,7 @@ do you like **DATA**? do you like **GRAPHS**? then you will :heart: **fang-stonk
 
 developed using [streamlit](https://www.streamlit.io/) and [yfinance](https://pypi.org/project/yfinance/).
 
-![screenshot](https://i.imgur.com/uAHJ4Lj.png)
+![screenshot](https://i.imgur.com/tG2hPD2.png)
 
 ### install dependencies from `requirements.txt` file
 You'll need python3 and pip of course
