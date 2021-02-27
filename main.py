@@ -3,25 +3,32 @@ import pandas as pd
 import altair as alt
 import yfinance as yf
 import urllib
+from datetime import datetime, timedelta
 
 st.title("FANG Stock Price")
-st.write("""
-### Stock prices for Various FANG companies over the last **20 days** 
+
+# TBA slider to change the number of days
+days_to_subtract = 20
+
+st.write(f"""
+### Stock prices for Various FANG companies over the last **{days_to_subtract} days** 
 """)
 
 @st.cache
 def get_data(tickers):
+    global days_to_subtract
     data = []
     for company in tickers.keys():
         tkr = yf.Ticker(tickers[company])
-        hist = tkr.history(period="20d")
+        hist = tkr.history(period=f"{days_to_subtract}d")
+        dates = list(hist.index)
         stock_data = hist['Close'].tolist()
         stock_data = [round(x, 2) for x in stock_data]
         stock_data.insert(0, company)
         data.append(stock_data)
-    c = [x for x in range(1,21)]
+    c = [x.strftime("%d %B %Y") for x in dates]
     c.insert(0, 'Name')
-    df = pd.DataFrame(data, columns = c) 
+    df = pd.DataFrame(data, columns=c) 
     return df.set_index('Name')
 
 try:
@@ -37,18 +44,19 @@ try:
         st.write("### Stock Prices (USD)", data.sort_index())
         data = data.T.reset_index()
         data = pd.melt(data, id_vars=["index"]).rename(
-            columns={"index": "days", "value": "Stock Prices (USD)"}
+            columns={"index": "Date", "value": "Stock Prices (USD)"}
         )
         chart = (
             alt.Chart(data)
-            .mark_area(opacity=0.3)
+            .mark_line(opacity=0.8)
             .encode(
-                x="days:O",
+                x="Date:O",
                 y=alt.Y("Stock Prices (USD):Q", stack=None),
                 color="Name:N",
             )
         )
         st.altair_chart(chart, use_container_width=True)
+
 except urllib.error.URLError as e:
     st.error(
         """
