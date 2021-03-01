@@ -7,8 +7,11 @@ from datetime import datetime, timedelta
 
 st.title("FANG Stock Price")
 
-# TBA slider to change the number of days
-days_to_subtract = 20
+st.sidebar.write("""
+## Select the number of days
+""")
+# days_to_subtract = 20
+days_to_subtract = st.sidebar.slider("Days", 1, 50, 20)
 
 st.write(f"""
 ### Stock prices for Various FANG companies over the last **{days_to_subtract} days** 
