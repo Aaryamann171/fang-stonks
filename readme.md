@@ -3,7 +3,7 @@ do you like **STOCKS**? do you like **GRAPHS**? then you will :heart: **fang-sto
 
 developed using [streamlit](https://www.streamlit.io/), [yfinance](https://pypi.org/project/yfinance/) and [CurrencyConverter](https://pypi.org/project/CurrencyConverter/).
 
-![screenshot](https://i.imgur.com/U7xqWsw.png)
+![screenshot](https://i.imgur.com/rU8KmyQ.png)
 
 ### install dependencies from `requirements.txt` file
 You'll need python3 and pip of course
