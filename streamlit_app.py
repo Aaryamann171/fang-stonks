@@ -7,6 +7,9 @@ from datetime import datetime, timedelta
 from currency_converter import CurrencyConverter
 
 st.title("FANG Stock Prices")
+st.write(f"""
+#### developed by [aaryamann171](https://github.com/aaryamann171)
+""")
 
 # currency selector
 st.sidebar.write("""
