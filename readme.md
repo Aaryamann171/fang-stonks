@@ -5,7 +5,7 @@ do you like **STOCKS**? do you like **GRAPHS**? then you will :heart: **fang-sto
 
 * :rocket: Thanks to the amazing folks at [streamlit.io](https://streamlit.io/) the app is now available at [here](https://share.streamlit.io/aaryamann171/fang-stonks/main/streamlit_app.py). :sparkles:
 
-![screenshot](https://i.imgur.com/rU8KmyQ.png)
+![fang-stonks-screenshot](https://i.imgur.com/JjypnTL.png)
 
 ### install dependencies from `requirements.txt` file
 You'll need python3 and pip of course
