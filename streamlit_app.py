@@ -11,6 +11,11 @@ st.write(f"""
 #### developed by [aaryamann171](https://github.com/aaryamann171)
 """)
 
+st.sidebar.write("""
+# Fang-Stonks
+It is stock price visualization tool. You can use the options below to change the currency as well as the number of days.
+""")
+
 # currency selector
 st.sidebar.write("""
 ## Select the Currency
@@ -59,7 +64,7 @@ try:
         "Choose companies", list(df.index), ["facebook", "amazon", "netflix", "google"]
     )
     if not companies:
-        st.error("Please select at least one country.")
+        st.error("Please select at least one company.")
     else:
         data = df.loc[companies]
         st.write(f"### Stock Prices ({currency_choice})", data.sort_index())
