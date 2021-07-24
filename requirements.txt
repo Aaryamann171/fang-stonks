@@ -1,3 +1,3 @@
 streamlit==0.79
-yfinance==0.1.55
+yfinance==0.1.63
 CurrencyConverter==0.16
