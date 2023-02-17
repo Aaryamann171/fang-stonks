@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import yfinance as yf
-import urllib
-from datetime import datetime, timedelta
 from currency_converter import CurrencyConverter
 
 st.title("FANG Stock Prices")
