@@ -58,7 +58,7 @@ def get_data(tickers):
     return df.set_index('Name')
 
 try:
-    tickers = {'apple':'AAPL', 'facebook':'FB', 'google': 'GOOGL', 'microsoft': 'MSFT', 'netflix': 'NFLX', 'amazon':'AMZN'}
+    tickers = {'apple':'AAPL', 'facebook':'META', 'google': 'GOOGL', 'microsoft': 'MSFT', 'netflix': 'NFLX', 'amazon':'AMZN'}
     df = get_data(tickers)
     companies = st.multiselect(
         "Choose companies", list(df.index), ["facebook", "amazon", "netflix", "google"]
@@ -83,9 +83,10 @@ try:
         )
         st.altair_chart(chart, use_container_width=True)
 
-except:
+except Exception as e:
+    print(e)
     st.error(
         """
-        **OOPS! Something went wrong.** :(
-    """
+            **OOPS! Something went wrong.** :(
+        """
     )
